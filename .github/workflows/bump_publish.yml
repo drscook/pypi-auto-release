@@ -17,11 +17,11 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: PATCH
 
+    - uses: actions/checkout@main
+    
     - name: Update version in setup.py
       run: >-
         sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.new_tag }}/g" setup.py
-
-    - uses: actions/checkout@main
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
