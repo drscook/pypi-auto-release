@@ -1,10 +1,10 @@
 name: tags
-on:  
+on:
   push:
     tags:
-      - '*'
+    - '*'
 jobs:
-  temp:
+  get-tags:
     - name: Extract tag name
       id: tag
       run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
