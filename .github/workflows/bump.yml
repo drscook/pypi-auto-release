@@ -30,4 +30,4 @@ jobs:
 
     - name: Update version in setup.py2
       run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
+        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag2.outputs.TAG_NAME }}/g" setup.py
