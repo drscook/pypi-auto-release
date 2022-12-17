@@ -1,31 +1,16 @@
-name: Release
+name: Bump version
 on: push
-
 jobs:
   build:
-    name: Create Release
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Get Version Number
-      uses: fwilhe2/bump-version@main
-      id: bump
+    - uses: actions/checkout@v3
       with:
-        component: patch
-    - run: echo New Version Number ${{ steps.bump.outputs.newVersion }}
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+        fetch-depth: '0'
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      with:
-        tag_name: ${{ steps.bump.outputs.newVersion }}
-        release_name: Release ${{ steps.bump.outputs.newVersion }}
-        draft: false
-        prerelease: false
-    - run: |
-        git config --global user.name 'Florian Wilhelm'
-        git config --global user.email 'fwilhelm.wgt+github@gmail.com'
-        git commit -am "Prepare next development iteration"
-        git push
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: PATCH
