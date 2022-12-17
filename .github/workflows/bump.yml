@@ -25,7 +25,7 @@ jobs:
         sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
 
     - name: Extract tag name2
-      id: tag
+      id: tag2
       run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
 
     - name: Update version in setup.py2
