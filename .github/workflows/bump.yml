@@ -10,6 +10,7 @@ jobs:
         fetch-depth: '0'
 
     - name: Bump version and push tag
+      id: tag
       uses: anothrNick/github-tag-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -17,8 +18,7 @@ jobs:
         DEFAULT_BUMP: PATCH
 
     - name: Extract tag name
-      id: tag
-      run: echo "TAG_NAME=$(echo $GITHUB_REF)"
+      run: echo "TAG_NAME=${{ steps.tag.outputs.new_tag }}"
 
     - name: Update version in setup.py
       run: >-
