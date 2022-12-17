@@ -17,17 +17,6 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: PATCH
 
-    - name: Extract tag name
-      run: echo "TAG_NAME=${{ steps.tag.outputs.new_tag }}"
-
     - name: Update version in setup.py
       run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/$GITHUB_OUTPUT/g" setup.py
-
-    - name: Extract tag name2
-      id: tag2
-      run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
-
-    - name: Update version in setup.py2
-      run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag2.outputs.TAG_NAME }}/g" setup.py
+        sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.new_tag }}/g" setup.py
