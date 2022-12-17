@@ -5,6 +5,10 @@ on:
     - '*'
 jobs:
   get-tags:
+    name: get tags
+    runs-on: ubuntu-latest
+    steps:
+    
     - name: Extract tag name
       id: tag
       run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
